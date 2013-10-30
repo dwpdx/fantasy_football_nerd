@@ -285,7 +285,7 @@ class FFNerd
 
   end
 
-  def self.standard_rankings(position = :all, limit = 20, strength_of_sched = true)
+  def self.standard_rankings(position = :all, limit = 999, strength_of_sched = false)
     rankings = []
     url = rankings_url(position, limit, true, strength_of_sched)
     doc = get_resource(url)
@@ -295,6 +295,9 @@ class FFNerd
       ranking.player_name = data.attr('name')
       ranking.player_team = data.attr('team')
       ranking.player_position = data.attr('position')
+      ranking.player_overall_rank = data.attr('overallrank')
+      ranking.player_position_rank = data.attr('positionrank')
+      ranking.player_bye = data.attr('byeweek')
       rankings << ranking
     end
     rankings
